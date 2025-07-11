@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal Pendaftaran Mahasiswa Baru - Matana University</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='rgba(255%2C255%2C255%2C0.1)'/%3E%3Cpolygon points='800%2C0 1200%2C0 1200%2C800 600%2C800' fill='rgba(255%2C255%2C255%2C0.05)'/%3E%3C/svg%3E");
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .search-form {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-top: 40px;
+      }
+
+      .program-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .program-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .news-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .news-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .cta-section {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 60px 0;
+        border-radius: 20px;
+        margin: 40px 0;
+      }
+
+      .navbar-brand {
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      .btn-primary {
+        background: #667eea;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+      }
+
+      .btn-primary:hover {
+        background: #5a67d8;
+      }
+
+      .strata-tab {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        padding: 10px 20px;
+        margin-right: 10px;
+        border-radius: 25px;
+        text-decoration: none;
+        color: #495057;
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+
+      .strata-tab.active {
+        background: #667eea;
+        color: white;
+      }
+
+      .steps-section {
+        background: #f8f9fa;
+        padding: 60px 0;
+        margin: 40px 0;
+        border-radius: 20px;
+      }
+
+      .step-card {
+        text-align: center;
+        padding: 30px 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .step-number {
+        width: 60px;
+        height: 60px;
+        background: #667eea;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0 auto 20px;
+      }
+
+      /* Footer Styles */
+      .footer {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: #ecf0f1;
+        padding: 3rem 0 1rem;
+        margin-top: auto;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section h3 {
+        color: #3498db;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        position: relative;
+      }
+
+      .footer-section h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 50px;
+        height: 2px;
+        background: #3498db;
+      }
+
+      .footer-section p {
+        margin-bottom: 1rem;
+        opacity: 0.9;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section ul li a {
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-section ul li a:hover {
+        color: #3498db;
+      }
+
+      .contact-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-info i {
+        margin-right: 0.5rem;
+        width: 20px;
+        color: #3498db;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(52, 152, 219, 0.1);
+        border: 2px solid #3498db;
+        border-radius: 50%;
+        color: #3498db;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: #3498db;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .newsletter {
+        background: rgba(52, 152, 219, 0.1);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border-left: 4px solid #3498db;
+      }
+
+      .newsletter-form {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
+
+      .newsletter-form button {
+        padding: 0.75rem 1.5rem;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background 0.3s ease;
+      }
+
+      .newsletter-form button:hover {
+        background: #2980b9;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .footer-bottom-links a {
+        color: #ecf0f1;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+      }
+
+      .footer-bottom-links a:hover {
+        color: #3498db;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        display: none;
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .back-to-top:hover {
+        background: #2980b9;
+        transform: translateY(-2px);
+      }
+
+      .back-to-top.show {
+        display: block;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .footer-bottom-links {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-university text-primary me-2"></i>
+          Matana University
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Beranda</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Program Studi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Jalur Pendaftaran</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Informasi</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <button class="btn btn-primary">Masuk</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 hero-content">
+            <h1 class="display-4 fw-bold mb-4">
+              Portal Pendaftaran Mahasiswa Baru
+            </h1>
+            <p class="lead mb-4">
+              Cari tahu informasi program studi, biaya kuliah, dan informasi
+              pendaftaran di Matana University
+            </p>
+
+            <div class="search-form">
+              <h5 class="mb-3">Cari Jalur Pendaftaran</h5>
+              <p class="text-muted small mb-4">
+                Temukan jalur pendaftaran sesuai dengan pilihan program studi
+                yang diminati
+              </p>
+              <form>
+                <div class="row g-3">
+                  <div class="col-md-3">
+                    <select class="form-select" id="pilihJenjang">
+                      <option selected>-- Pilih Jenjang --</option>
+                      <option value="S1">Strata 1</option>
+                      <option value="S2">Strata 2</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <select class="form-select" id="pilihProgram">
+                      <option selected>-- Pilih Program Studi --</option>
+                      <option value="manajemen">Manajemen</option>
+                      <option value="akuntansi">Akuntansi</option>
+                      <option value="fisika">Fisika</option>
+                      <option value="statistika">Statistika</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <select class="form-select" id="pilihSistem">
+                      <option selected>-- Pilih Sistem Kuliah --</option>
+                      <option value="reguler">Reguler</option>
+                      <option value="eksekutif">Eksekutif</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                      Cari Jalur Pendaftaran
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <!-- Building illustration placeholder -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Studi Section -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h3 class="mb-4">Informasi Program Studi</h3>
+
+            <!-- Strata Tabs -->
+            <div class="mb-4">
+              <a href="#" class="strata-tab active" data-strata="S1"
+                >S1 - Strata 1</a
+              >
+              <a href="#" class="strata-tab" data-strata="S2">S2 - Strata 2</a>
+            </div>
+
+            <!-- Program Cards -->
+            <div id="programList">
+              <div class="program-card">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">S1 - Manajemen</h6>
+                    <p class="text-muted small mb-0">
+                      Tersedia 4 Jalur Pendaftaran
+                    </p>
+                  </div>
+                  <button class="btn btn-outline-primary btn-sm">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+
+              <div class="program-card">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">S1 - Hospitality Dan Pariwisata</h6>
+                    <p class="text-muted small mb-0">
+                      Tersedia 4 Jalur Pendaftaran
+                    </p>
+                  </div>
+                  <button class="btn btn-outline-primary btn-sm">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+
+              <div class="program-card">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">S1 - Akuntansi</h6>
+                    <p class="text-muted small mb-0">
+                      Tersedia 4 Jalur Pendaftaran
+                    </p>
+                  </div>
+                  <button class="btn btn-outline-primary btn-sm">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+
+              <div class="program-card">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">S1 - Fisika</h6>
+                    <p class="text-muted small mb-0">
+                      Tersedia 4 Jalur Pendaftaran
+                    </p>
+                  </div>
+                  <button class="btn btn-outline-primary btn-sm">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+
+              <div class="program-card">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">S1 - Statistika</h6>
+                    <p class="text-muted small mb-0">
+                      Tersedia 4 Jalur Pendaftaran
+                    </p>
+                  </div>
+                  <button class="btn btn-outline-primary btn-sm">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <a href="#" class="btn btn-outline-primary"
+                >Lihat Semua Prodi S1 - Strata 1
+                <i class="fas fa-chevron-right ms-2"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="sticky-top">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h6 class="card-title">Brosur Dan Informasi Biaya</h6>
+                  <p class="card-text small text-muted">
+                    Brosur dan rincian biaya kuliah di Matana University
+                  </p>
+                  <button class="btn btn-outline-primary btn-sm">
+                    Lihat Detail
+                  </button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title">
+                    Tata Cara Pendaftaran Mahasiswa Baru
+                  </h6>
+                  <ol class="small">
+                    <li class="mb-2">
+                      <strong>Pilih Jalur Pendaftaran</strong><br />
+                      <span class="text-muted"
+                        >Terdapat jalur masuk sesuai dengan pilihan dan
+                        kebutuhan kampus.</span
+                      >
+                    </li>
+                    <li class="mb-2">
+                      <strong>Isi Formulir Pendaftaran</strong><br />
+                      <span class="text-muted"
+                        >Lengkapi data dan pola formulir secara benar.</span
+                      >
+                    </li>
+                    <li class="mb-2">
+                      <strong>Bayar Biaya Pendaftaran</strong><br />
+                      <span class="text-muted"
+                        >Lakukan pembayaran sesuai petunjuk yang tersedia.</span
+                      >
+                    </li>
+                    <li class="mb-2">
+                      <strong>Unggah Berkas & Ikuti Seleksi</strong><br />
+                      <span class="text-muted"
+                        >Kirim dokumen dan ikuti tahapan seleksi sesuai
+                        jadwal.</span
+                      >
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3>Informasi & Pengumuman</h3>
+          <a href="#" class="btn btn-outline-primary"
+            >Lihat Semua Informasi <i class="fas fa-chevron-right ms-2"></i
+          ></a>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="news-card">
+              <img
+                src="https://via.placeholder.com/400x200/667eea/ffffff?text=MATANA+UNGGUL"
+                class="card-img-top"
+                alt="News"
+              />
+              <div class="card-body">
+                <small class="text-muted">18 April 2024</small>
+                <h6 class="card-title">MATANA UNGGUL - Ujian Saringan Masuk</h6>
+                <span class="badge bg-warning text-dark">Pengumuman</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="news-card">
+              <img
+                src="https://via.placeholder.com/400x200/764ba2/ffffff?text=PRICELIST+TAHUN+AJARAN+2025"
+                class="card-img-top"
+                alt="News"
+              />
+              <div class="card-body">
+                <small class="text-muted">24 Juni 2024</small>
+                <h6 class="card-title">PRICELIST TAHUN AJARAN 2025/2026</h6>
+                <span class="badge bg-info text-dark">Pengumuman</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+      <div class="cta-section text-center">
+        <h3 class="mb-4">Kami Siap Membantu Anda</h3>
+        <p class="lead mb-4">
+          Apakah Anda memiliki keperluan atau pertanyaan silahkan hubungi kami
+          dan dapatkan jawaban yang membantu Anda menggunakan layanan kami
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+          <button class="btn btn-light">
+            <i class="fab fa-whatsapp me-2"></i> WhatsApp
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <!-- About Section -->
+          <div class="footer-section">
+            <h3>Tentang Kami</h3>
+            <p>
+              Kami adalah perusahaan yang berkomitmen untuk memberikan layanan
+              terbaik kepada pelanggan. Dengan pengalaman bertahun-tahun, kami
+              siap membantu Anda mencapai tujuan bisnis.
+            </p>
+            <div class="social-links">
+              <a href="#" title="Facebook">📘</a>
+              <a href="#" title="Twitter">🐦</a>
+              <a href="#" title="Instagram">📷</a>
+              <a href="#" title="LinkedIn">💼</a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-section">
+            <h3>Tautan Cepat</h3>
+            <ul>
+              <li><a href="/">Beranda</a></li>
+              <li><a href="/tentang">Tentang Kami</a></li>
+              <li><a href="/layanan">Layanan</a></li>
+              <li><a href="/produk">Produk</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/kontak">Kontak</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="footer-section">
+            <h3>Hubungi Kami</h3>
+            <div class="contact-info">
+              <i>📍</i>
+              <span>Jl. Contoh No. 123, Jakarta Selatan, Indonesia</span>
+            </div>
+            <div class="contact-info">
+              <i>📞</i>
+              <span>+62 21 1234 5678</span>
+            </div>
+            <div class="contact-info">
+              <i>✉️</i>
+              <span>info@website.com</span>
+            </div>
+            <div class="contact-info">
+              <i>🌐</i>
+              <span>www.website.com</span>
+            </div>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="footer-section">
+            <div class="newsletter">
+              <h3>Newsletter</h3>
+              <p>
+                Dapatkan update terbaru dan penawaran khusus langsung ke email
+                Anda.
+              </p>
+              <form class="newsletter-form">
+                <input
+                  type="email"
+                  placeholder="Masukkan email Anda"
+                  required
+                />
+                <button type="submit">Berlangganan</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <div>
+            <p>&copy; 2024 Website Kami. Semua hak dilindungi.</p>
+          </div>
+          <div class="footer-bottom-links">
+            <a href="/privacy">Kebijakan Privasi</a>
+            <a href="/terms">Syarat & Ketentuan</a>
+            <a href="/sitemap">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke Atas">
+      ↑
+    </button>
+
+    <script>
+      // Back to top functionality
+      const backToTopButton = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      });
+
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Newsletter form submission
+      document
+        .querySelector(".newsletter-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const email = e.target.querySelector('input[type="email"]').value;
+          alert(
+            `Terima kasih! Email ${email} telah berhasil didaftarkan untuk newsletter.`
+          );
+          e.target.reset();
+        });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

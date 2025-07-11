@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.p~$
+*.egg-info/
+*.egg
+*.env
+*.venv/
+*.log
+*.sqlite3
+
+# Environment / secrets
+.env
+.env.local
+*.secret
+*.key
+*.pem
+
+# Django specific
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# VSCode / PyCharm
+.vscode/
+.idea/
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Git / Pip
+*.lock
+Pipfile.lock
+poetry.lock
+
+# Migration backups (optional)
+*/migrations/__pycache__/
+*/migrations/*.pyc
+*/migrations/*.pyo
+*/migrations/*.py~$
+*/migrations/*.pyc~
+!*/migrations/__init__.py
+
+# Node.js (optional, if using with Next.js or Tailwind)
+node_modules/
+package-lock.json
+yarn.lock
+.next/
+build/
+dist/
+
+# Docker (optional)
+*.pid
+*.pid.lock
+__dockerbuild__/
